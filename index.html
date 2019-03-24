@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Doraemon</title>
+<script>
+   alert("Thanks for visiting.I hope You Will enjoy it.");
+alert("Please give suggestion in comments");
+  
+    var images=["https://lumiere-a.akamaihd.net/v1/images/open-uri20150608-27674-jq3771_5b5ec6eb.jpeg?region=0%2C0%2C800%2C600","https://lumiere-a.akamaihd.net/v1/images/open-uri20150608-27674-qkvy28_b0d936ca.jpeg?region=0%2C0%2C800%2C600","http://paperlief.com/images/doraemon-wallpaper-1.jpg"];
+        var num=0;
+        var time=setInterval(move,5000);
+        
+        function next(){
+            var slider=document.getElementById("slider");
+            num++;
+            if(num>=images.length){
+                num=0;
+            }
+            slider.src=images[num];
+        }
+        function prev(){
+            var slider=document.getElementById("slider");
+            num--;
+            if(num<0){
+                num=images.length-1;
+            }
+            slider.src=images[num];
+        }
+        function move(){
+            num++;
+            if(num>=images.length){
+                num=0;
+            }
+            slider.src=images[num];
+        }
+        
+        function play(){
+            var box1=document.getElementById("page1");
+            var box2=document.getElementById("page2");
+            
+            box1.style.display="none";
+            box2.style.display="block";
+            document.getElementById("moves").style.display ="block"
+           
+            Start();
+           
+        }
+        
+        function home(){
+            var home=document.getElementById("home");
+            var box1=document.getElementById("page1");
+            var box2=document.getElementById("page2");
+           
+            box1.style.display="block";
+            box2.style.display="none";
+        }
+
+        var array = ["https://i.pinimg.com/736x/8f/79/d1/8f79d1e9222ce724cb4ed6c95998f0bf--doraemon-cake-doraemon-wallpapers.jpg",
+                     "https://i.pinimg.com/736x/8f/79/d1/8f79d1e9222ce724cb4ed6c95998f0bf--doraemon-cake-doraemon-wallpapers.jpg",
+                     "https://www.shareicon.net/data/256x256/2016/01/16/249030_nobita_256x256.png",
+                     "https://www.shareicon.net/data/256x256/2016/01/16/249030_nobita_256x256.png",
+                     "https://vignette.wikia.nocookie.net/dorepedia/images/a/a8/Sensei_icon.png/revision/latest?cb=20120109150307&path-prefix=vi",
+                     "https://vignette.wikia.nocookie.net/dorepedia/images/a/a8/Sensei_icon.png/revision/latest?cb=20120109150307&path-prefix=vi",
+                     "https://vignette.wikia.nocookie.net/dorepedia/images/0/02/Bo_Nobi_icon.png/revision/latest?cb=20120109150104&path-prefix=vi",
+                     "https://vignette.wikia.nocookie.net/doraemon/images/6/6d/Nobimom2016.png/revision/latest?cb=20160810114009&path-prefix=en",
+                     "https://vignette.wikia.nocookie.net/doraemon/images/6/6d/Nobimom2016.png/revision/latest?cb=20160810114009&path-prefix=en",
+                     "https://vignette.wikia.nocookie.net/dorepedia/images/0/02/Bo_Nobi_icon.png/revision/latest?cb=20120109150104&path-prefix=vi",
+                     "https://cdn140.picsart.com/244218895036212.png?r1024x1024",
+                     "https://cdn140.picsart.com/244218895036212.png?r1024x1024",
+                     "http://i.imgur.com/3loKXMY.jpg",
+                     "http://i.imgur.com/3loKXMY.jpg",
+                     "https://shortcut-test2.s3.amazonaws.com/uploads/role/attachment/62853/default_Suneo.png",
+                     "https://shortcut-test2.s3.amazonaws.com/uploads/role/attachment/62853/default_Suneo.png"];
+        var values = [];
+        var ids = [];
+        var flipped = 0;
+        var move=0;
+        Array.prototype.shuffle = function(){
+            var i = this.length, j, temp;
+            while(--i > 0){
+                j = Math.floor(Math.random() * (i+1));
+                temp = this[j];
+                this[j] = this[i];
+                this[i] = temp;
+            }
+        }
+        function Start(){
+            tiles_flipped = 0;
+document.getElementById("moves").innerHTML="Moves:"+move;             
+            var output = '';
+            array.shuffle();
+            for(var i = 0; i < array.length; i++){
+                output += '<img id="tile_'+i+'" onclick="memoryFlipTile(this,\''+array[i]+'\')" src="https://lumiere-a.akamaihd.net/v1/images/open-uri20150422-12561-11rzr62_ebccba8f.png?region=0%2C0%2C375%2C180" ></div>';
+            }
+            document.getElementById('grid').innerHTML = output;
+        }
+        
+        function memoryFlipTile(tile,val){          
+            move++; 
+document.getElementById("moves").innerHTML="Moves:"+move;            
+            if(tile.innerHTML == "" && values.length < 2){
+                tile.style.background = '#FFF';
+                tile.src = val;
+              if(values.length == 0){
+                    values.push(val);
+                    ids.push(tile.id);
+                } else if(values.length == 1){
+                    values.push(val);
+                    ids.push(tile.id);
+              if(values[0] == values[1] && ids[0]!=ids[1]){
+                        tiles_flipped += 2;
+                    
+                        values = [];
+                        ids = [];
+                        
+              if(tiles_flipped == array.length){
+            if(move<30){
+          alert("you ¢ra¢ked the game !!! Play Again( "+move+" moves)");}  
+            if(move>=30 && move<35){
+          alert("Excellent !!! Play Again( "+move+" moves)");}
+            if(move>=35 && move<40){
+          alert("Good!!! Play Again( "+move+" moves)");}
+           if(move>=40 && move<50){
+          alert("Medium!!! Play Again( "+move+" moves)");}  
+           if(move>=50){
+          alert("Try Agaain!!!  Play Again( "+move+" moves)");}        
+                           document.getElementById('grid').src = "";
+                           document.getElementById("grid").style.display="none";
+                          document.getElementById("alert").style.display="block";
+             Start();
+              }  
+                  
+              } else {
+               function flip2Back(){
+                        
+            var tile_1 = document.getElementById(ids[0]);
+            var tile_2 = document.getElementById(ids[1]);
+                       
+            tile_1.src = "https://lumiere-a.akamaihd.net/v1/images/open-uri20150422-12561-11rzr62_ebccba8f.png?region=0%2C0%2C375%2C180";
+            tile_2.style.background = 'url(tile_bg.jpg) no-repeat';
+           
+            tile_2.src = "https://lumiere-a.akamaihd.net/v1/images/open-uri20150422-12561-11rzr62_ebccba8f.png?region=0%2C0%2C375%2C180"; 
+            tile_1.style.background = 'url(tile_bg.jpg) no-repeat';
+               values = [];
+               ids = [];
+                        }
+                        setTimeout(flip2Back, 800);
+                    }}}}        
+            
+            
+          function  replay(){
+              move =0; 
+document.getElementById("moves").innerHTML="Moves:"+move;            document.getElementById("grid").style.display="block";
+                          document.getElementById("alert").style.display="none";
+            }
+</script>
+<meta >
+<link rel="stylesheet" href="game.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="heading">
+       <center> 
+       <p class="head">My First Game</p>
+       <p id="moves" style="display:none"></p>
+       </center>
+    </div>
+    <div class="body1">
+        <div class="nav">
+            <center>
+            <a id="home" href="#" onclick="home()">Home</a> ||
+            <a href="" style="color:green">About Us</a>
+            </center>
+         </div>
+    <div  id="page1">
+        <div id="image">
+            <img id="slider" src="https://lumiere-a.akamaihd.net/v1/images/open-uri20150608-27674-jq3771_5b5ec6eb.jpeg?region=0%2C0%2C800%2C600" width="100%" height="50%">
+            <center>
+            <button onclick="prev()">Prev</button>
+            <button onclick="next()">Next</button><br><br>
+            <button class="play" onclick="play()">PLAY</button>
+            </center>
+        </div>
+      <div class="img">
+            <img src="https://lumiere-a.akamaihd.net/v1/images/open-uri20150422-12561-11rzr62_ebccba8f.png?region=0%2C0%2C375%2C180" width="100%" height="10%">
+       </div>
+    </div>
+    <div id="page2" style="display:none">
+       <div id="grid"></div>
+
+        <div id="alert" style="display:none"><center><img src="https://stickershop.line-scdn.net/stickershop/v1/product/582/LINEStorePC/main@2x.png;compress=true?__=20161019"></center><br>
+        <center>Congratulation</center><br>
+        <center><button class="play" onclick="replay()">REPLAY</button></center>
+        </div>
+       
+    </div>
+    <div id="footer" style="background-color:black;color:white">
+        <hr color="red">
+        <footer>
+          <center>
+             Copyright 2018 &copy<br>
+             Made By &copy BUDDHADEB DAS
+        </center>
+        </footer>
+    </div>
+    </div>
+</body>
+</html>
